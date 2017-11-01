@@ -1,0 +1,23 @@
+<div class="nav-wrapper container"><a id="logo-container" href="{% url 'index' %}" class="brand-logo">EXCHANGE</a>
+    <ul class="right hide-on-med-and-down">
+        {% if request.user.is_authenticated == False %}
+            <li><a href="{% url 'usuarios:login' %}">Ingresar</a></li>
+            <li><a href="{% url 'usuarios:crear_usuario' %}">Crear usuario</a></li>  
+        {% else %}
+            <li><a href="{% url 'usuarios:logout' %}">Cerrar sesión</a></li> 
+        {% endif %}
+      
+    </ul>
+
+    <ul id="nav-mobile" class="side-nav">
+        {% if request.user.is_authenticated == False %}
+            <li><a href="{% url 'usuarios:login' %}">Ingresar</a></li>
+        {% else %}
+            {% if request.user.is_staff == True %}
+                <li><a href="">Crear usuario</a></li>  
+            {% endif %}
+            <li><a href="{% url 'usuarios:logout' %}">Cerrar sesión</a></li> 
+        {% endif %}
+    </ul>
+    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+</div>

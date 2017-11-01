@@ -1,0 +1,11 @@
+{% extends "base/main.html" %}
+
+
+{% block container %}
+    <div class="row">
+        <div class="col s12 m12 l12">
+            Hola <span style="font-weight: bold; font-size: 18px;">{{request.user.first_name}}</span> Tienes de fondo <span style="color: yellowgreen; font-weight: bold;">${{request.user.perfil.fondo}}MXN</span>
+        </div>
+    </div>
+{% endblock container %}
+    
