@@ -3,8 +3,54 @@
 
 {% block container %}
     <div class="row">
-        <div class="col s12 m12 l12">
-            Hola <span style="font-weight: bold; font-size: 18px;">{{request.user.first_name}}</span> Tienes de fondo <span style="color: yellowgreen; font-weight: bold;">${{request.user.perfil.fondo}}MXN</span>
+        <div class="col col-sm-12 col-md-8 col-lg-8">
+            <h5>Hola <span style="font-weight: bold;">{{usuario.first_name}}</span> Tienes de fondo <span style="color: yellowgreen; font-weight: bold;">${{usuario.perfil.fondo}}MXN</span></h5>
+        </div>
+        <div class="col col-sm-12 col-md-4 col-lg-4">
+            <a href="{% url 'usuarios:fondear_cuenta' %}" class="btn btn-success">Agregar Fondos</a>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col col-sm-12 col-md-12 col-lg-12">
+            <span style="font-size:1.2em; font-weight: bold;">Monederos</span>   
+        </div>       
+        <br>
+        <br>
+        <br>
+        {% if monederos %}
+            <div class="col col-sm12 col-md-12 col-lg-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre monedero</th>
+                            <th scope="col">Tipo moneda</th>
+                            <th scope="col">Cantidad</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for monedero in monederos %}
+                            <tr>
+                                <td>{{monedero.nombre}} </td>
+                                <td>{{monedero.moneda.nombre_corto}}-{{monedero.moneda}}</td>
+                                <td>{{monedero.monto}}</td>
+                                <td><a href="{% url 'divisas:fondear_monedero' monedero.id %}" class="btn btn-warning">Transferir fondos a monedero</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div> 
+        {% else %}
+            <div class="col col-sm-12 col-md-12 col-lg-12">
+                <p>Aun no tienes monederos agregados</p>
+            </div>
+        {% endif %}
+        <div class="col col-sm-12 col-md-12 col-lg-12">
+            <a href="{% url 'divisas:crear_monedero' %}" class="btn btn-primary orange accent-3">Crear Monedero</a>
         </div>
     </div>
 {% endblock container %}

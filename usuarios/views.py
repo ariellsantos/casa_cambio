@@ -3,9 +3,13 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+
 from .forms import LoginForm, Perfil, UserForm, UsuarioForm
 from .models import Perfil
 from django.contrib.auth.models import User
+from .usaurio import fondear_cuenta
+from decimal import Decimal
 
 def login_user(request):
     if request.user.is_authenticated():
@@ -50,7 +54,8 @@ def guardar_usuario(request):
             user.save()                        
             usuario.usuario = user
             usuario.save()
-
+            user = authenticate(username=username, password=password)
+            login(request, user)
         return redirect("divisas:dashboard")
 
     
@@ -59,3 +64,11 @@ def guardar_usuario(request):
         form_usuario = UsuarioForm()
         return render(request, "usuarios/crear_usuario.html", {'user_form': user_form, 'usuario_form': form_usuario})
 
+def fondear_cuenta_perfil(request):
+    if request.method == "POST":
+        monto = Decimal(request.POST.get('monto', 0))
+        fondear_cuenta(request,monto)
+        messages.success(request, 'Se fondeo correctamente la cuenta')
+        return redirect("divisas:dashboard")
+    if request.method ==  "GET":
+        return render(request, 'usuarios/fondear_cuenta.html')

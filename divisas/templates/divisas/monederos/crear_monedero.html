@@ -1,0 +1,22 @@
+{% extends "base/main.html" %}
+
+
+{% block container %}
+    <div class="row">
+        <div class="col col-sm-12 col-md-5 col-lg-5">
+            <h4>Crea un nuevo monedero</h4>
+            <form action="{% url 'divisas:crear_monedero' %}" method="POST">
+                {% csrf_token %}
+                {{form_monedero.as_p}}
+
+                <div class="form-group">
+
+                    <input type="submit" value="Crear Monedero" class="btn btn-success form-control">
+                
+                </div>
+            </form>
+            
+        </div>
+    </div>
+{% endblock container %}
+    

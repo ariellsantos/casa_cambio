@@ -1,0 +1,36 @@
+{% extends 'base/main.html' %}
+
+
+{% block container %}
+    <div class="row">
+        <div class="col col-sm-12 col-md-12 col-lg-12">
+            <h5>Monedero: <span style="color: violet;">{{monedero.nombre}}</span> Moneda: <span style="color: violet;">{{moneda.nombre_corto}}-{{moneda.nombre}}</span> Tipo de cambio: <span style="color: tomato;">${{moneda.tipo_cambio}}MXN</span></h5>
+        </div>
+        <div class="col col-sm-12 col-md-12 col-lg-12">
+            <h5>Tienes para fondear la cantidad de <span style="color: yellowgreen">$ {{usuario.perfil.fondo}}MXN</span> </h5>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="col col-sm-12 col-md-12 col-lg-12">
+            <div class="row">
+                <div class="col col-sm-12 col-md-12 col-lg-12">
+                        <h4>Transferir fondos</h4>
+                </div>
+                <div class="col col-sm-12 col-md-12 col-lg-12">
+                    <form action="{% url 'divisas:fondear_monedero' monedero.id %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="number" min="0" max="{{usuario.perfil.fondo}}" name="transferir" class="form-control" placeholder="Cantidad a transferir" name="monto">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Transferir a monedero" class="btn btn-success">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+{% endblock container %}
+    
