@@ -61,3 +61,6 @@ def fondear_monederos(request, pk):
         transferir_fondos_a_monedero(request,monedero, usuario, monto_a_transferir)
         messages.success(request, 'Se transifirieron fondos al monedero correctamente')
         return redirect('divisas:dashboard')
+
+
+
