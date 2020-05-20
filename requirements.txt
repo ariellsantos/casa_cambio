@@ -18,7 +18,7 @@ Flask==0.10.1
 functools32==3.2.3.post2
 ggplot==0.11.5
 gyp==0.1
-httplib2==0.8
+httplib2==0.18.0
 ipython==5.2.2
 ipython-genutils==0.1.0
 itsdangerous==0.24
