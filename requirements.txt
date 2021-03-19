@@ -22,7 +22,7 @@ httplib2==0.8
 ipython==5.2.2
 ipython-genutils==0.1.0
 itsdangerous==0.24
-Jinja2==2.8
+Jinja2==2.11.3
 lockfile==0.8
 lxml==3.3.3
 MarkupSafe==0.23
